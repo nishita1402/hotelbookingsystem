@@ -8,29 +8,30 @@ import { useEffect } from "react";
 import axios from "axios";
 
 
-const Datatable = () => {
- 
+const Datatable = ({columns}) => {
+
 
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState();
-  const { data, loading, error } = useFetch(`http://localhost:3000/users`);
+  const { data, loading, error } = useFetch(`/${path}`);
 
   useEffect(() => {
     setList(data);
     // console.log(data)
   }, [data]);
 
-useEffect(()=>{
-  console.log(data, loading)}
-,[loading])
+  // useEffect(() => {
+  //   console.log(data, loading)
+  // }
+    // , [loading])
   const handleDelete = async (id) => {
     try {
-      console.log("delete", id)
-      await axios.delete(`http://localhost:3000/${path}/${id}`);
+      // console.log("delete", id)
+      await axios.delete(`/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
-      console.log(list)
-    } catch (err) {}
+      // console.log(list)
+    } catch (err) { }
   };
 
 
@@ -49,7 +50,7 @@ useEffect(()=>{
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params)}
+              onClick={() => handleDelete(params.row._id)}
             >
               Delete
             </div>
@@ -61,20 +62,21 @@ useEffect(()=>{
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
-        <Link to="/users/new" className="link">
-          Add New
+        {path}
+        <Link to={`/${path}/new`} className="link">
+          Add New 
         </Link>
       </div>
-{  data ?     <DataGrid
+    
+      {list ? <DataGrid
         className="datagrid"
         rows={list}
-        columns={userColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
+        columns={columns.concat(actionColumn)}
+        pageSize={15}
+        rowsPerPageOptions={[15]}
         checkboxSelection
-        getRowId={(row)=>row._id}
-      />: <p>loading</p>}
+        getRowId={(row) => row._id}
+      /> : <p>loading</p>}
     </div>
   );
 };

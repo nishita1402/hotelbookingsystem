@@ -137,7 +137,31 @@ const Reserve = ({ setOpen, hotelId }) => {
         })
       );
       setOpen(false);
-      navigate("/");
+      // navigate("/");
+        var options = {
+        key: "rzp_test_xmKoEHnqrB4exj",
+        key_secret:"dN6pIC2NRWnFIi1LJGWJYzZ6",
+        amount: totalAmount *100,
+        currency:"INR",
+        name:"STARTUP_PROJECTS",
+        description:"for testing purpose",
+          handler: function(response){
+            alert(response.razorpay_payment_id);
+          },
+        prefill: {
+          name:"DSAN",
+          email:"asapkampany",
+          contact:"111111111"
+        },
+        notes:{
+          address:"Razorpay office"
+        },
+        theme: {
+          color:"#3399cc"
+        }
+      };
+      var pay = new window.Razorpay(options);
+      pay.open();
     } catch (err) {}
   };
   return (

@@ -21,3 +21,12 @@
   color: #003580;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .fLists {
+    list-style: none;
+    padding: 0;
+    margin-left: 233px;
+    max-width: 35rem;
+  }
+}

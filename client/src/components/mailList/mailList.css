@@ -28,3 +28,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .mail {
+    flex-direction: column;
+    max-width: 30rem;
+  }
+}

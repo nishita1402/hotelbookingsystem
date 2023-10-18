@@ -25,6 +25,16 @@
   cursor: pointer;
   color: #003580;
 }
-/* .navItems{
-  margin-right: 20px;
-} */
+
+
+@media (max-width: 768px) {
+  .navContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .navButton {
+    margin-top: 10px; /* Add margin between buttons for smaller screens */
+  }
+}
